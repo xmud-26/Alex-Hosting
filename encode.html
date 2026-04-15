@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JS Obfuscator Pro</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: radial-gradient(circle at left, #0f2a23, #000);
+  color: white;
+}
+
+/* NAVBAR */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: 3px;
+}
+
+.menu {
+  width: 25px;
+  height: 3px;
+  background: #22c55e;
+  position: relative;
+}
+.menu::before,
+.menu::after {
+  content: "";
+  position: absolute;
+  width: 25px;
+  height: 3px;
+  background: #22c55e;
+}
+.menu::before { top: -8px; }
+.menu::after { top: 8px; }
+
+/* CONTENT */
+.container {
+  padding: 30px 20px;
+}
+
+.badge {
+  display: inline-block;
+  border: 1px solid #22c55e;
+  color: #22c55e;
+  padding: 8px 18px;
+  border-radius: 30px;
+  margin-bottom: 20px;
+  font-size: 13px;
+  letter-spacing: 2px;
+}
+
+.title {
+  font-size: 38px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.desc {
+  color: #aaa;
+  margin-bottom: 25px;
+}
+
+/* TEXTAREA */
+textarea {
+  width: 100%;
+  height: 140px;
+  margin-bottom: 15px;
+  border-radius: 15px;
+  border: none;
+  padding: 15px;
+  background: #111;
+  color: #0f0;
+  outline: none;
+}
+
+/* BUTTONS */
+.btn {
+  width: 100%;
+  padding: 18px;
+  border-radius: 20px;
+  border: none;
+  font-weight: 600;
+  margin-bottom: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.encode {
+  background: #22c55e;
+  color: black;
+}
+
+.copy {
+  background: #111;
+  color: white;
+  border: 1px solid #333;
+}
+
+.btn:hover {
+  transform: scale(1.03);
+  opacity: 0.9;
+}
+</style>
+</head>
+
+<body>
+
+<div class="nav">
+  <div class="logo">BosCode</div>
+  <div class="menu"></div>
+</div>
+
+<div class="container">
+
+  <div class="badge">OBFUSCATE JAVASCRIPT</div>
+
+  <div class="title">Modern JS Obfuscator Tool.</div>
+
+  <div class="desc">
+    Encode dan lindungi script JavaScript kamu dengan tampilan modern & simpel.
+  </div>
+
+  <textarea id="input" placeholder="Masukkan script JavaScript..."></textarea>
+
+  <button class="btn encode" onclick="encodeJS()">ENCODE SCRIPT</button>
+
+  <button class="btn copy" onclick="copyText()">SALIN HASIL</button>
+
+  <textarea id="output" placeholder="Hasil obfuscate akan muncul di sini..." readonly></textarea>
+
+</div>
+
+<script>
+function encodeJS() {
+  let input = document.getElementById("input").value;
+  if (!input) return alert("Masukin script dulu bro!");
+
+  let encoded = btoa(unescape(encodeURIComponent(input)));
+  let result = `eval(atob("${encoded}"))`;
+
+  document.getElementById("output").value = result;
+}
+
+function copyText() {
+  let output = document.getElementById("output");
+  output.select();
+  document.execCommand("copy");
+  alert("Berhasil disalin!");
+}
+</script>
+
+</body>
+</html>
